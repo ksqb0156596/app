@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>后台应用管理</title>
+    <link href="./css/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <link href="./css/bootstrap/bootstrap-table.min.css" rel="stylesheet">
+    <link href="./css/index.css" rel="stylesheet">
+    <link href="./css/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="./js/layer/skin/default/layer.css" rel="stylesheet">
+    <script src="./js/jquery-1.12.4.min.js"></script>
+    <script src="./js/layer/layer.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
+    <script src="./js/bootstrap-table.min.js"></script>
+    <script src="./js/jquery.ajaxfileupload.js"></script>
+
+</head>
+<body>
+    <!-- 导航条 -->
+    <nav class="navbar navbar-default navbar-fixed-top" style="position: relative">
+        <div>
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">游戏下载管理</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li class="active" page-index="0"><a href="#">首页配置</a></li>
+                    <li page-index="1"><a href="#">APP配置</a></li>
+                </ul>
+            </div><!--/.nav-collapse -->
+        </div>
+    </nav>
+    <div class="container" id="index">
+        <section>
+            <div>
+                1.首页滚动图片：
+            </div>
+            <div>
+                <div class="carousel_bar">
+                    <div class="carousel_upload carousel_img">
+                        <i class="fa fa-plus fa-2x" onclick="uploadAlert(1,'carousel');"></i>
+                    </div>
+                    <div class="carousel_img hover-delete" style="background-image: url(./images/test.jpg)">
+
+                    </div>
+                </div>
+            </div>
+
+        </section>
+        <section>
+            <div>
+                2.今日推荐：
+            </div>
+            <div>
+                <select id="recommend" class="recommend">
+                    <option value="0">请选择</option>
+                </select>
+            </div>
+        </section>
+        <section>
+            <div>
+                3.火爆游戏--首推
+            </div>
+            <div>
+                <div class="hot-game hover-delete" style="background-image: url(./images/test.jpg)">
+                </div>
+                <div class="hot-game" style="display: none;">
+                    <i class="fa fa-plus fa-2x"></i>
+                </div>
+            </div>
+        </section>
+        <section>
+            <div>
+                4.火爆游戏--推荐（仅支持四个）
+            </div>
+            <ul>
+                <li>
+                    <select name="hot-game-small" class="hot-game-small">
+                        <option>请选择</option>
+                    </select>
+                </li>
+                <li>
+                    <select name="hot-game-small" class="hot-game-small">
+                        <option>请选择</option>
+                    </select>
+                </li>
+                <li>
+                    <select name="hot-game-small" class="hot-game-small">
+                        <option>请选择</option>
+                    </select>
+                </li>
+                <li>
+                    <select name="hot-game-small" class="hot-game-small">
+                        <option>请选择</option>
+                    </select>
+                </li>
+
+            </ul>
+        </section>
+    </div>
+
+
+    <div class="container" id="index-app" style="display: none">
+        <div>
+            <button class="btn btn-success" onclick="addApp()">添加</button>
+        </div>
+        <div>
+            <table id="app-table"></table>
+        </div>
+
+    </div>
+
+
+    <div id="addApp" style="display: none" class="container">
+    </div>
+
+    
+    
+    <script>
+        function addApp() {
+            layer.open({
+                type: 1,
+                skin: 'layui-layer-rim', //加上边框
+                area: ['1200px','600px'],
+                content: '<div style="padding-left: 5%;padding-right: 5%;">'+
+                            '<div class="form-name">游戏名称：</div>'+
+                            '<div class="form-input"><input type="text" placeholder="请输入游戏名称" name="appName"></div>'+
+                            '<div class="form-name">游戏描述：</div>'+
+                            '<div class="form-input"><textarea name="description"></textarea></div>'+
+                            '<div class="form-name">游戏图标：</div>'+
+                            '<div>'+
+//                                '<div class="game-icon hover-delete" style="background-image: url(./images/test.jpg)" >'+
+//                                '</div>'+
+                                '<div class="game-icon">'+
+                                    '<i class="fa fa-plus fa-2x" onclick="uploadAlert(0,\'icon\');"></i>' +
+                                '</div>'+
+                            '</div>'+
+                            '<div class="form-name">详情页图片：</div>'+
+                                '<div style="float: left;width: 100%;">'+
+                                '<div class="carousel_bar">'+
+                                '<div class="carousel_upload carousel_img">'+
+                                '<i class="fa fa-plus fa-2x" onclick="uploadAlert(0,\'detail\');"></i>'+
+                                '</div>'+
+                                '<div class="carousel_img hover-delete" style="background-image: url(./images/test.jpg)" >'+
+                                '</div>'+
+                                '</div>'+
+                            '</div>'+
+                            '<div class="form-name">游戏大小(M)：</div>'+
+                            '<div class="form-input"><input type="number" placeholder="请输入游戏大小（M）" name="appName"></div>'+
+                            '<div class="form-name">游戏评分：</div>'+
+                            '<div class="form-input"><input type="number" placeholder="请输入10以内的评分" name="appName"></div>'+
+                            '<div class="form-name">下载链接：</div>'+
+                            '<div class="form-input"><input type="text" placeholder="请输入游戏的下载链接" name="appName"></div>'+
+                            '<div class="form-name">qq群号：</div>'+
+                            '<div class="form-input"><input type="text" placeholder="请输入游戏的QQ群号" name="appName"></div>'+
+                            '<div class="form-name">游戏状态：</div>'+
+                            '<div class="form-input">'+
+                                '<select>'+
+                                '<option value="0">失效</option>'+
+                                '<option value="1" selected>启动</option>'+
+                                '</select>'+
+                            '</div>'+
+                            '<div class="form-input">'+
+                            '<button class="btn btn-success">提交</button>'+
+                            '</div>'+
+                '</div>',
+                cancel : function(){
+
+                }
+            })
+        }
+
+        function uploadAlert(flag,name){
+                layer.open({
+                    type: 1,
+                    skin: 'layui-layer-rim', //加上边框
+                    area: ['600px','600px'],
+                    content: "<div>" +
+                    (flag ? ("<div class='form-name'>" +
+                                "<select id='gameUpload'></select>" +
+                                "</div>" ) : (""))+
+                                "<div class='form-name'>" +
+                                    "<input type='file' multiple=true id='uploadImage' name='file'/>" +
+                                "</div>" +
+                                "<div class='form-name'>" +
+                                    "<button class='btn btn-success' onclick='upload(\"" + name + "\");'>上传</button>" +
+                                "</div>" +
+                             "</div>",
+                    success : function(){
+                        switch (name)
+                        {
+                            case "icon" : $("#uploadImage").removeAttr("multiple");break;
+                            case "detail" : $("#uploadImage").attr("multiple",true);break;
+                            case "carousel" : $("#uploadImage").removeAttr("multiple");break;
+                        }
+                    }
+                })
+        }
+
+        function upload(name) {
+            var files = document.getElementById("uploadImage").files;
+
+            for(var i = 0;i < files.length;i++){
+                var filename = files[i].name;
+                if(!filename || filename.length == 0){
+                    layer.alert("上传文件不能为空");
+                    return false;
+                }
+                if(!(filename.indexOf("jpg") > -1 || filename.indexOf("jpeg") > -1 ||filename.indexOf("gif") > -1 ||
+                        filename.indexOf("png") > -1 ||filename.indexOf("bmp") > -1)){
+                    layer.alert("仅支持图片文件格式上传");
+                    return false;
+                }
+            }
+
+            $.ajaxFileUpload({
+                url : "/app/upload/upload",
+                secureuri : false,
+                fileElementId : "uploadImage",
+                dataType:"json",
+                success : function (response) {
+                    console.log(response)
+                }
+            })
+
+        }
+    </script>
+    <script>
+        $("body").on('mouseenter','.hover-delete',function(){
+            $(this).append("<div class='delete_img' style='line-height: " + $(this).css("height") + "'><i class='fa fa-close fa-2x'></i> </div>")
+        })
+        $("body").on('mouseleave','.hover-delete',function(){
+            $('.delete_img').remove();
+        })
+        $("#navbar").on('click','ul li',function(){
+            $("#navbar").find('li').removeClass("active");
+            var num = $(this).attr("page-index");
+            switch (num){
+                case '0': $(".container").hide();$('#index').show();$(this).addClass("active");break;
+                case '1': $(".container").hide();$('#index-app').show();$(this).addClass("active");break;
+            }
+        })
+//        function imgMouseenter(e){
+//            $(e).append("<div class='delete_img' style='line-height: " + $(e).css("height") + "'><i class='fa fa-close fa-2x'></i> </div>")
+//        }
+//        function imgMouseleave(e) {
+//            $('.delete_img').remove();
+//        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shouyou.app.dao.AppInfoDao">
+  <resultMap id="BaseResultMap" type="com.shouyou.app.entity.AppInfo">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="img_url" jdbcType="VARCHAR" property="imgUrl" />
+    <result column="detail_img_url" jdbcType="VARCHAR" property="detailImgUrl" />
+    <result column="app_size" jdbcType="VARCHAR" property="appSize" />
+    <result column="app_score" jdbcType="TINYINT" property="appScore" />
+    <result column="app_url" jdbcType="VARCHAR" property="appUrl" />
+    <result column="qq" jdbcType="VARCHAR" property="qq" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="update_user" jdbcType="VARCHAR" property="updateUser" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, name, description, img_url, detail_img_url, app_size, app_score, app_url, qq, 
+    status, update_time, update_user
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from app_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from app_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.shouyou.app.entity.AppInfo">
+    insert into app_info (id, name, description, 
+      img_url, detail_img_url, app_size, 
+      app_score, app_url, qq, 
+      status, update_time, update_user
+      )
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
+      #{imgUrl,jdbcType=VARCHAR}, #{detailImgUrl,jdbcType=VARCHAR}, #{appSize,jdbcType=VARCHAR}, 
+      #{appScore,jdbcType=TINYINT}, #{appUrl,jdbcType=VARCHAR}, #{qq,jdbcType=VARCHAR}, 
+      #{status,jdbcType=TINYINT}, #{updateTime,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.shouyou.app.entity.AppInfo">
+    insert into app_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="imgUrl != null">
+        img_url,
+      </if>
+      <if test="detailImgUrl != null">
+        detail_img_url,
+      </if>
+      <if test="appSize != null">
+        app_size,
+      </if>
+      <if test="appScore != null">
+        app_score,
+      </if>
+      <if test="appUrl != null">
+        app_url,
+      </if>
+      <if test="qq != null">
+        qq,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="updateUser != null">
+        update_user,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="imgUrl != null">
+        #{imgUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="detailImgUrl != null">
+        #{detailImgUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="appSize != null">
+        #{appSize,jdbcType=VARCHAR},
+      </if>
+      <if test="appScore != null">
+        #{appScore,jdbcType=TINYINT},
+      </if>
+      <if test="appUrl != null">
+        #{appUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null">
+        #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null">
+        #{updateUser,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.shouyou.app.entity.AppInfo">
+    update app_info
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="imgUrl != null">
+        img_url = #{imgUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="detailImgUrl != null">
+        detail_img_url = #{detailImgUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="appSize != null">
+        app_size = #{appSize,jdbcType=VARCHAR},
+      </if>
+      <if test="appScore != null">
+        app_score = #{appScore,jdbcType=TINYINT},
+      </if>
+      <if test="appUrl != null">
+        app_url = #{appUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null">
+        qq = #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null">
+        update_user = #{updateUser,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.shouyou.app.entity.AppInfo">
+    update app_info
+    set name = #{name,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      img_url = #{imgUrl,jdbcType=VARCHAR},
+      detail_img_url = #{detailImgUrl,jdbcType=VARCHAR},
+      app_size = #{appSize,jdbcType=VARCHAR},
+      app_score = #{appScore,jdbcType=TINYINT},
+      app_url = #{appUrl,jdbcType=VARCHAR},
+      qq = #{qq,jdbcType=VARCHAR},
+      status = #{status,jdbcType=TINYINT},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      update_user = #{updateUser,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+</mapper>

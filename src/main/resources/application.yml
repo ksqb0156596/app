@@ -1,0 +1,23 @@
+server:
+    port: 8081
+spring:
+  datasource:
+    driverClassName: "com.mysql.jdbc.Driver"
+    url: "jdbc:mysql://120.77.87.40:3306/shouyou_ims?useUnicode=true&characterEncoding=utf-8"
+    username: "pat"
+    password: "Pat523430"
+mybatis:
+  type-aliases-package: "com.shouyou.app.entity"
+  mapper-locations: "classpath:/mappers/*Mapper.xml"
+pagehelper:
+    helperDialect: mysql
+    reasonable: true
+    supportMethodsArguments: true
+    params: count=countSql
+    pageSizeZero: 0
+    returnPageInfo: always
+qiniu:
+  accessKey: "iPBVbNYwFb_7M5GOHYFjTFEkcsDqMomFbRVA95tt"
+  secretKey: "UJjluq3LsyqQYwF9192pYFFDCl0bITqykZqggzHd"
+  domain: "or7tr5mq5.bkt.clouddn.com"
+  bucketName: "shouyou"
